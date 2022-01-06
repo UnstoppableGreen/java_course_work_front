@@ -1,5 +1,5 @@
 <template>
-<!--<search-user></search-user>-->
+<!--<search-carrier></search-carrier>-->
 <list-carriers></list-carriers>
 <navbar-carriers> </navbar-carriers>
 </template>
@@ -7,14 +7,14 @@
 <script>
 import ListCarriers from '../components/carriers/ListCarriers.vue'
 import NavbarCarriers from '../layouts/NavbarCarriers.vue'
-//import SearchUser from './functionalities/SearchUser.vue'
+//import SearchCarrier from './functionalities/SearchCarrier.vue'
 
 export default {
     name: 'CarriersIndex',
     components: {
         ListCarriers,
         NavbarCarriers,
-        //SearchUser,
+       // SearchCarrier,
 
     },
 
