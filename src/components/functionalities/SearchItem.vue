@@ -1,15 +1,15 @@
 <template>
 <div class="z-999 search-container flex justify-between md:ml-8 py-2">
-    <div class="search-contain relative"><input @keydown="isSearch=true" v-model="search" type="text" class="transition duration-200  ease-in-out bg-gray-200 h-10  pr-8 pl-5 rounded z-0 focus:bg-gray-100 focus:outline-none search-input" placeholder="Search User...">
+    <div class="search-contain relative"><input @keydown="isSearch=true" v-model="search" type="text" class="transition duration-200  ease-in-out bg-gray-200 h-10  pr-8 pl-5 rounded z-0 focus:bg-gray-100 focus:outline-none search-input" placeholder="Search Item...">
         <span class="absolute md:text-2xl material-icons search-icon">search</span>
         <div v-show="isSearch" class="search-list  absolute bg-white text-sm shadow-lg">
             <transition-group name='list'>
-                <div class="transition duration-200  ease-in-out cursor-pointer hover:bg-blue-200 p-1 md:p-2 border-t-2 border-gray-100" v-for="user in searchedList" :key="user.clientID">
+                <div class="transition duration-200  ease-in-out cursor-pointer hover:bg-blue-200 p-1 md:p-2 border-t-2 border-gray-100" v-for="item in searchedList" :key="item.id">
                     <div class="flex py-2">
                         <div class="px-5">
-							{{`${user.name}`}}
+							{{`${item.name}`}}
                         </div>
-						<router-link :to="{name:'user.edit', params: {clientID: user.clientID }} " class="text-gray-500  hover:text-blue-500  mx-2">
+						<router-link :to="{name:'item.edit', params: {itemID: item.id }} " class="text-gray-500  hover:text-blue-500  mx-2">
 							<i class="font-bold transition duration-200 ease-in-out material-icons-outlined md:text-md">manage_accounts</i>
 						</router-link>
                     </div>
@@ -30,22 +30,22 @@ import {
     onMounted,
     computed
 } from '@vue/runtime-core'
-import useUser from '../../composables/Users'
+import useItem from '../../composables/Items'
 export default {
-    name:'Search User',
+    name:'Search Item',
     setup() {
 
         const search = ref('')
         const isSearch = ref(false)
-        const {EntireUserList,getEntireUserList} = useUser()
+		const {EntireItemsList,getEntireItemsList} = useItem()
        
        const searchedList = computed(() => {
-            return EntireUserList.value.filter(user =>
-                `${user.name}`.toLowerCase().includes(search.value.toLowerCase())
+            return EntireItemsList.value.filter(item =>
+                `${item.name}`.toLowerCase().includes(search.value.toLowerCase())
             )
         })
 
-        onMounted(getEntireUserList)
+        onMounted(getEntireItemsList)
 
         return {
             search,
