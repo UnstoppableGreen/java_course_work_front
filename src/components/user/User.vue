@@ -32,7 +32,7 @@
     </td>
     <td
       class="hidden md:table-cell text-center md:pl-1 md:py-5 bg-white text-sm"
-    >
+     v-if="hasRoles(['editClients'])">
       <router-link
         :to="{ name: 'user.edit', params: { clientID: userdata.clientID } }"
         class="text-gray-500 hover:text-blue-500 mx-2"
@@ -72,7 +72,8 @@
 
 <script>
 import useUser from "../../composables/Users";
-
+import { useKeycloak } from '@baloise/vue-keycloak'
+const { hasRoles } = useKeycloak();
 export default {
   name: "User",
   props: {
@@ -84,7 +85,7 @@ export default {
   setup() {
     const { deleteUser } = useUser();
     return {
-      deleteUser,
+      deleteUser, hasRoles
     };
   },
 };

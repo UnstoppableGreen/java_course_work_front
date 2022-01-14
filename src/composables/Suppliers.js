@@ -18,7 +18,7 @@ export default function useSuppliers(){
     
     const getPageData = async(params)=>{
 		let response = await API.get('/suppliers/getSuppliers',{params:params})
-		return response.data
+		return response.data.data
 
     }
 

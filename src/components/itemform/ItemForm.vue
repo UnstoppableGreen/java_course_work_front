@@ -75,7 +75,7 @@
 				</div>
               <!--<p> ответ {{JSON.stringify(orderdata.orderDetails)}} </p>-->
               <div
-                class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse"
+                class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse"  v-if="hasRoles(['editItems'])"
               >
                 <button
                   type="submit"
@@ -107,8 +107,8 @@ import { onMounted } from "@vue/runtime-core";
 import useItems from "../../composables/Items";
 import useSuppliers from "../../composables/Suppliers";
 import { ref } from '@vue/reactivity';
-//import Detail from "../orders/Detail.vue";
-//import axios from 'axios'
+import { useKeycloak } from '@baloise/vue-keycloak'
+const { hasRoles } = useKeycloak();
 
 //const { usersdata, getAllClientData } = useUser();
 let suppliers=ref([])
@@ -159,6 +159,7 @@ export default {
     return {
 		itemdata,
 		saveItem,
+    hasRoles,
     };
 	},
   methods: {

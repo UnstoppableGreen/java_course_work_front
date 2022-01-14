@@ -204,16 +204,16 @@ export default {
         case "asc":
           filteredData.value = Array.from(EntireOrdersList.value).sort(
             (a, b) => {
-              if (a[1].name < b[1].name) return -1;
-              return a[1].name > b[1].name ? 1 : 0;
+              if (a[0].statusID < b[0].statusID) return -1;
+              return a[0].statusID > b[0].statusID ? 1 : 0;
             }
           );
           break;
         case "des":
           filteredData.value = Array.from(EntireOrdersList.value).sort(
             (a, b) => {
-              if (a[1].name > b[1].name) return -1;
-              return a[1].name < b[1].name ? 1 : 0;
+              if (a[0].statusID > b[0].statusID) return -1;
+              return a[0].statusID < b[0].statusID ? 1 : 0;
             }
           );
           break;

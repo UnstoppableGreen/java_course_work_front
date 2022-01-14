@@ -25,7 +25,7 @@ export default function useItem(){
     
     const getPageData = async(params)=>{
 		let response = await API.get('/items/getItems',{params:params})
-		return response.data
+		return response.data.data
         //let response = await API.get('/client/getClients',{params:params})
         //return response.data.data
     }

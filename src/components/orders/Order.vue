@@ -40,7 +40,7 @@
       </router-link>
       <router-link
         :to="{ name: 'order.edit', params: { orderID: ordersdata[0].id } }"
-        class="text-gray-500 hover:text-blue-500 mx-2"
+        class="text-gray-500 hover:text-blue-500 mx-2"  v-if="hasRoles(['editOrders'])"
       >
         <i
           class="font-bold transition duration-200 ease-in-out material-icons-outlined md:text-md"
@@ -49,7 +49,7 @@
       </router-link>
       <a
         @click="deleteOrder(ordersdata[0].id)"
-        class="text-gray-500 cursor-pointer ml-2"
+        class="text-gray-500 cursor-pointer ml-2"  v-if="hasRoles(['editOrders'])"
       >
         <i
           class="transition duration-200 ease-in-out material-icons-round text-gray-500 hover:text-blue-500 md:text-md"
@@ -62,7 +62,8 @@
 
 <script>
 import useOrder from "../../composables/Orders";
-
+import { useKeycloak } from '@baloise/vue-keycloak'
+const { hasRoles } = useKeycloak();
 export default {
   name: "Order",
   props: {
@@ -74,7 +75,7 @@ export default {
   setup() {
     const { deleteOrder } = useOrder();
     return {
-      deleteOrder,
+      deleteOrder, hasRoles
     };
   },
 };

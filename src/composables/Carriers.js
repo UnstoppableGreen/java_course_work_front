@@ -6,9 +6,16 @@ export default function useCarriers(){
     const data= ref([])
     const carriers= ref([])
     const carrier= ref([])
+    const carriersdata= ref([])
     const router = useRouter() //для операций UPDATE и STORE
     const EntireCarriersList = ref([])
 
+
+    const getAllData = async (params) => {
+      let response = await API.get('/ShipmentsAndDeliveries/getCarriers',{params:params})
+          data.value = response.data;
+          carriersdata.value=response.data.data;
+      }
     const getAllCarriers = async () => {
         let response = await API.get(`/ShipmentsAndDeliveries/getAllCarriers`)
 		data.value = response.data;
@@ -18,7 +25,7 @@ export default function useCarriers(){
 
     const getPageData = async(params)=>{
 		let response = await API.get('/ShipmentsAndDeliveries/getCarriers',{params:params})
-		return response.data
+		return response.data.data
 
     }
 
@@ -61,6 +68,8 @@ export default function useCarriers(){
         data,
         carriers,
         carrier,
+        carriersdata,
+        getAllData,
         getAllCarriers,
         EntireCarriersList,
         getEntireCarriersList,

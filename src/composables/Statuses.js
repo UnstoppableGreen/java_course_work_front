@@ -5,7 +5,8 @@ import { ref } from '@vue/reactivity';
 export default function useStatuses(){
     const statuses= ref([])
 	const data= ref([])
-	
+	const status= ref([])
+
     const getStatuses = async () => {
         let response = await API.get(`/status/getStatuses`)
 		data.value = response.data;
@@ -13,10 +14,16 @@ export default function useStatuses(){
 	console.log('getStatuses response: '+JSON.stringify( statuses.value));
 	return statuses;
     }
-    
+
+    const getStatusById = async (statusID) => {
+        let response = await API.get(`/status/getStatusById?statusID=${statusID}`) 
+        status.value = response.data;		
+    }
     
       return {
             statuses,
+            status,
+            getStatusById,
 			getStatuses,
       }
   

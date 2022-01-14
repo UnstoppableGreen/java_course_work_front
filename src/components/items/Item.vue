@@ -17,10 +17,10 @@
          </td>    		  
          <td class="hidden md:table-cell text-center md:pl-1 md:py-5  bg-white text-sm">
 			<router-link :to="{name:'item.edit', params: {itemID: itemsdata.id }} " class="text-gray-500  hover:text-blue-500  mx-2">
-				<i class="font-bold transition duration-200 ease-in-out material-icons-outlined md:text-md">manage_accounts</i>
+				<i class="font-bold transition duration-200 ease-in-out material-icons-outlined md:text-md">edit</i>
 			</router-link>
-            <a @click="deleteItem(itemsdata.id)" class="text-gray-500 cursor-pointer ml-2">
-				<i class="transition duration-200 ease-in-out material-icons-round text-gray-500 hover:text-blue-500 md:text-md">person_remove</i>
+            <a @click="deleteItem(itemsdata.id)" class="text-gray-500 cursor-pointer ml-2"  v-if="hasRoles(['editItems'])">
+				<i class="transition duration-200 ease-in-out material-icons-round text-gray-500 hover:text-blue-500 md:text-md">remove</i>
             </a>
         </td>
        
@@ -32,6 +32,8 @@
 import useItems from '../../composables/Items';
 import useSuppliers from '../../composables/Suppliers';
 import {onMounted} from '@vue/runtime-core'
+import { useKeycloak } from '@baloise/vue-keycloak'
+const { hasRoles } = useKeycloak();
 export default {
     name:'Item',
     props:{
@@ -48,7 +50,7 @@ export default {
 			await getSupplierById(props.itemsdata.defaultSupplierID)
         })
         return{
-            deleteItem, supplier
+            deleteItem, supplier, hasRoles
         }
     }
 	//<!-- //0801-->

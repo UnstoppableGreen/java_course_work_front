@@ -25,7 +25,7 @@
     >
       <router-link
         :to="{ name: 'supplier.edit', params: { supplierID: suppliersdata.id } }"
-        class="text-gray-500 hover:text-blue-500 mx-2"
+        class="text-gray-500 hover:text-blue-500 mx-2"  v-if="hasRoles(['editSuppliers'])"
       >
         <i
           class="
@@ -41,7 +41,7 @@
       </router-link>
       <a
         @click="deleteSupplier(suppliersdata.id)"
-        class="text-gray-500 cursor-pointer ml-2"
+        class="text-gray-500 cursor-pointer ml-2"  v-if="hasRoles(['editSuppliers'])"
       >
         <i
           class="
@@ -62,7 +62,8 @@
 
 <script>
 import useSuppliers from "../../composables/Suppliers";
-
+import { useKeycloak } from '@baloise/vue-keycloak'
+const { hasRoles } = useKeycloak();
 export default {
   name: "Supplier",
   props: {
@@ -74,7 +75,7 @@ export default {
   setup() {
     const { deleteSupplier } = useSuppliers();
     return {
-      deleteSupplier,
+      deleteSupplier, hasRoles
     };
   },
 };

@@ -202,14 +202,14 @@ export default {
   data: function () {
     const { allordersdata,getAllOrders } = useOrder();
     const { statuses, getStatuses } = useStatuses();
-    const { suppliers,	getAllSuppliers, } = useSuppliers();
+    const { suppliersdata,	getAllSuppliers, } = useSuppliers();
 
     onMounted(getAllOrders());
     orders = allordersdata;
     onMounted(getStatuses());
     requeststatuses = statuses;
     onMounted(getAllSuppliers());
-    allsuppliers = suppliers;
+    allsuppliers = suppliersdata;
     return {
       orders,
       requeststatuses,
